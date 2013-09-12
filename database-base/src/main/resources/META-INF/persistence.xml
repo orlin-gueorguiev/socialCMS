@@ -1,0 +1,20 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+        version="2.0">
+    <persistence-unit name="com.github.orlin.socialCMS.database.entities">
+        <description>Includes all the entities from database-base project</description>
+        
+        <class>com.github.orlin.socialCMS.database.entities.AddressDao</class>
+        <class>com.github.orlin.socialCMS.database.entities.CompanyDao</class>
+        <class>com.github.orlin.socialCMS.database.entities.CountryDao</class>
+        <class>com.github.orlin.socialCMS.database.entities.PersonDao</class>
+        <class>com.github.orlin.socialCMS.database.entities.WebPresenceDao</class>
+        
+        <properties>
+            <property name="hibernate.show_sql" value="true" />
+        </properties>
+    </persistence-unit>
+    
+    
+</persistence>

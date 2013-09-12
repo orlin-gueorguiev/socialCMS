@@ -1,0 +1,165 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd" logicalFilePath="v1/v1.0">
+
+	<changeSet id="v1_130911_generate_country" author="orlin" context="setup">
+		<createTable tableName="Country">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="nameInDefaultLanguage" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="zipCodePrefix" type="varchar(255)" />
+
+			<column name="isoCountryCode" type="varchar(255)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="COUNTRY_MUST_HAVE_UNIQUE_ISO_CODE" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet id="v1_130911_populate_country" author="orlin" context="populate">
+		<insert tableName="Country">
+			<column name="nameInDefaultLanguage" value="България" />
+			<column name="zipCodePrefix" value="BG" />
+			<column name="isoCountryCode" value="bg" />
+		</insert>
+
+		<insert tableName="Country">
+			<column name="nameInDefaultLanguage" value="Deutschland" />
+			<column name="zipCodePrefix" value="DE" />
+			<column name="isoCountryCode" value="de" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="v1_130911_generate_address" author="orlin" context="setup">
+		<createTable tableName="Address">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="countryId" type="int">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="zipCode" type="int">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="street" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_ADDRESS_COUNTRYID" referencedTableName="Country" baseColumnNames="countryId"
+			baseTableName="Address" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="v1_130911_populate_address" author="orlin" context="dev">
+		<insert tableName="Address">
+			<column name="countryId" value="1" />
+			<column name="zipCode" value="1000" />
+			<column name="street" value="ул. 'Кирилица'" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="v1_130911_generate_WebPresence" author="orlin" context="setup">
+		<createTable tableName="WebPresence">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="email" type="varchar(255)" />
+
+			<column name="webpage" type="varchar(511)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="v1_130911_generate_Company" author="orlin" context="dev">
+		<createTable tableName="Company">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="webpresenceId" type="int" />
+
+			<column name="addressId" type="int" />
+
+
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_COMPANY_WEBPRESENCEID" referencedTableName="WebPresence" baseColumnNames="webpresenceId"
+			baseTableName="Company" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint constraintName="FK_COMPANY_ADDRESSID" referencedTableName="Address" baseColumnNames="addressId"
+			baseTableName="Company" referencedColumnNames="id" />
+	</changeSet>
+
+
+
+	<changeSet id="v1_130911_generate_Person" author="orlin" context="setup">
+		<createTable tableName="Person">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="firstName" type="varchar(255)" />
+
+			<column name="lastName" type="varchar(255)" />
+
+			<column name="webpresenceId" type="int" />
+
+			<column name="addressId" type="int" />
+
+			<column name="companyId" type="int" />
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_PERSON_WEBPRESENCEID" referencedTableName="WebPresence" baseColumnNames="webpresenceId"
+			baseTableName="Person" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint constraintName="FK_PERSON_ADDRESSID" referencedTableName="Address" baseColumnNames="addressId" baseTableName="Person"
+			referencedColumnNames="id" />
+
+		<addForeignKeyConstraint constraintName="FK_PERSON_COMPANYID" referencedTableName="Company" baseColumnNames="companyId" baseTableName="Person"
+			referencedColumnNames="id" />
+
+	</changeSet>
+
+	<changeSet id="v1_130911_populate_Company" author="orlin" context="dev">
+		<insert tableName="Company">
+			<column name="name" value="Кирилица Компани" />
+			<column name="addressId" value="1" />
+		</insert>
+
+		<insert tableName="WebPresence">
+			<column name="email" value="test123@test.com" />
+			<column name="webpage" value="http://www.test.com" />
+		</insert>
+
+		<insert tableName="Person">
+			<column name="firstName" value="Кирилица" />
+			<column name="lastName" value="Едно" />
+			<column name="addressId" value="1" />
+			<column name="webpresenceId" value="1" />
+			<column name="companyId" value="1" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="v1_130911_add_CompanyStatus" author="orlin" context="setup">
+		<addColumn tableName="Company">
+			<column name="status" type="int" defaultValue="0" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="v1_130911_add_CompanyStatus_NotNull" author="orlin" context="setup">
+		<addNotNullConstraint tableName="Company" columnName="status" />
+	</changeSet>
+
+</databaseChangeLog>	

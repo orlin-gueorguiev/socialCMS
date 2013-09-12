@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Id changeSet naming convention: There are three types of changeSet-s: -->
+<!-- 1. Generating a specific table. Name is: <prefix>_generate_<tableName> -->
+<!-- 2. Update a specific table. Name is: <prefix>_update_<tableName> -->
+<!-- 3. Populate with data. Name is: <prefix>_populate_<tableName>, -->
+<!-- <prefix> is YYMMDD. -->
+
+<!-- Context types: -->
+<!-- 1. setup: Setting up the system -->
+<!-- 2. populate: Populating the DB with Productive data -->
+<!-- 3. dev: Populate the DB with Development/Test data -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+
+	<include file="v1/v1.0.xml" relativeToChangelogFile="true"/>
+	
+</databaseChangeLog>
