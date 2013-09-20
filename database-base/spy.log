@@ -1,33 +1,33 @@
-1379129154640|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
-DB: 06:09:54|-1||info||Using properties file: /home/orlin/git/socialCMS/database-base/target/classes/spy.properties
-DB: 06:09:54|-1||info||No value in environment for: getStackTrace, using: false
-DB: 06:09:54|-1||info||No value in environment for: getFilter, using: false
-DB: 06:09:54|-1||info||No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
-DB: 06:09:54|-1||info||No value in environment for: getDeregisterDrivers, using: true
-DB: 06:09:54|-1||info||No value in environment for: getUsePrefix, using: false
-DB: 06:09:54|-1||info||No value in environment for: getExecutionThreshold, using: 0
-DB: 06:09:54|-1||info||No value in environment for: getAutoflush, using: true
-DB: 06:09:54|-1||info||No value in environment for: getExclude, using: 
-DB: 06:09:54|-1||info||No value in environment for: getExcludecategories, using: info,debug,result,batch
-DB: 06:09:54|-1||info||No value in environment for: getInclude, using: 
-DB: 06:09:54|-1||info||No value in environment for: getIncludecategories, using: 
-DB: 06:09:54|-1||info||No value in environment for: getLogfile, using: spy.log
-DB: 06:09:54|-1||info||No value in environment for: getRealdriver, using: org.postgresql.Driver
-DB: 06:09:54|-1||info||No value in environment for: getRealdriver2, using: null
-DB: 06:09:54|-1||info||No value in environment for: getRealdriver3, using: null
-DB: 06:09:54|-1||info||No value in environment for: getAppend, using: true
-DB: 06:09:54|-1||info||No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
-DB: 06:09:54|-1||info||No value in environment for: getDateformat, using: 'DB:' HH:MM:ss
-DB: 06:09:54|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@ba62070e
-DB: 06:09:54|-1||info||No value in environment for: getStringmatcher, using: com.p6spy.engine.common.SubstringMatcher
-DB: 06:09:54|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@19c04f13
-DB: 06:09:54|-1||info||No value in environment for: getStackTraceClass, using: 
-DB: 06:09:54|-1||info||No value in environment for: getSQLExpression, using: null
-DB: 06:09:54|-1||info||No value in environment for: getReloadProperties, using: false
-DB: 06:09:54|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
-DB: 06:09:54|-1||info||No value in environment for: getJNDIContextFactory, using: null
-DB: 06:09:54|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
-DB: 06:09:54|-1||info||No value in environment for: getJNDIContextCustom, using: null
-DB: 06:09:54|-1||info||No value in environment for: getRealDataSource, using: null
-DB: 06:09:54|-1||info||No value in environment for: getRealDataSourceClass, using: null
-DB: 06:09:54|-1||info||No value in environment for: getRealDataSourceProperties, using: null
+1379696526144|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
+DB: 20:09:06|-1||info||Using properties file: /home/orlin/git/socialCMS/database-base/target/classes/spy.properties
+DB: 20:09:06|-1||info||No value in environment for: getStackTrace, using: false
+DB: 20:09:06|-1||info||No value in environment for: getFilter, using: false
+DB: 20:09:06|-1||info||No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
+DB: 20:09:06|-1||info||No value in environment for: getDeregisterDrivers, using: true
+DB: 20:09:06|-1||info||No value in environment for: getUsePrefix, using: false
+DB: 20:09:06|-1||info||No value in environment for: getExecutionThreshold, using: 0
+DB: 20:09:06|-1||info||No value in environment for: getAutoflush, using: true
+DB: 20:09:06|-1||info||No value in environment for: getExclude, using: 
+DB: 20:09:06|-1||info||No value in environment for: getExcludecategories, using: info,debug,result,batch
+DB: 20:09:06|-1||info||No value in environment for: getInclude, using: 
+DB: 20:09:06|-1||info||No value in environment for: getIncludecategories, using: 
+DB: 20:09:06|-1||info||No value in environment for: getLogfile, using: spy.log
+DB: 20:09:06|-1||info||No value in environment for: getRealdriver, using: org.postgresql.Driver
+DB: 20:09:06|-1||info||No value in environment for: getRealdriver2, using: null
+DB: 20:09:06|-1||info||No value in environment for: getRealdriver3, using: null
+DB: 20:09:06|-1||info||No value in environment for: getAppend, using: true
+DB: 20:09:06|-1||info||No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
+DB: 20:09:06|-1||info||No value in environment for: getDateformat, using: 'DB:' HH:MM:ss
+DB: 20:09:06|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@ba62070e
+DB: 20:09:06|-1||info||No value in environment for: getStringmatcher, using: com.p6spy.engine.common.SubstringMatcher
+DB: 20:09:06|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@24b19bfc
+DB: 20:09:06|-1||info||No value in environment for: getStackTraceClass, using: 
+DB: 20:09:06|-1||info||No value in environment for: getSQLExpression, using: null
+DB: 20:09:06|-1||info||No value in environment for: getReloadProperties, using: false
+DB: 20:09:06|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
+DB: 20:09:06|-1||info||No value in environment for: getJNDIContextFactory, using: null
+DB: 20:09:06|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
+DB: 20:09:06|-1||info||No value in environment for: getJNDIContextCustom, using: null
+DB: 20:09:06|-1||info||No value in environment for: getRealDataSource, using: null
+DB: 20:09:06|-1||info||No value in environment for: getRealDataSourceClass, using: null
+DB: 20:09:06|-1||info||No value in environment for: getRealDataSourceProperties, using: null

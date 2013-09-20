@@ -4,7 +4,7 @@
 
 
 	<changeSet id="v1_130911_generate_country" author="orlin" context="setup">
-	
+
 		<createTable tableName="Country">
 			<column name="id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_COUNTRY_ID" />
@@ -21,11 +21,11 @@
 			</column>
 
 			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
 			</column>
 		</createTable>
 	</changeSet>
@@ -61,13 +61,13 @@
 			<column name="street" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
-			
+
 			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
 			</column>
 		</createTable>
 
@@ -86,27 +86,27 @@
 	<changeSet id="v1_130911_generate_WebPresence" author="orlin" context="setup">
 		<createTable tableName="WebPresence">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_WEBPRESENCE_ID"/>
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_WEBPRESENCE_ID" />
 			</column>
 
 			<column name="email" type="varchar(255)" />
 
 			<column name="webpage" type="varchar(511)" />
-			
+
 			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
-			</column>			
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
 		</createTable>
 	</changeSet>
 
 	<changeSet id="v1_130911_generate_Company" author="orlin" context="dev">
 		<createTable tableName="Company">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_COMPANY_ID"/>
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_COMPANY_ID" />
 			</column>
 
 			<column name="name" type="varchar(255)">
@@ -118,11 +118,11 @@
 			<column name="addressId" type="int" />
 
 			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
 			</column>
 		</createTable>
 
@@ -150,14 +150,14 @@
 			<column name="addressId" type="int" />
 
 			<column name="companyId" type="int" />
-			
+
 			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
-			</column>			
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
 		</createTable>
 
 		<addForeignKeyConstraint constraintName="FK_PERSON_WEBPRESENCEID" referencedTableName="WebPresence" baseColumnNames="webpresenceId"
@@ -190,33 +190,109 @@
 			<column name="companyId" value="1" />
 		</insert>
 	</changeSet>
-	
-	<changeSet id="v1_130914_setup_authentication" author="orlin" context="setup">
-		<createTable tableName="Principal">
-			<column name="id" type="int" autoIncrement="true">
-				<constraints nullable="false" primaryKey="true"/>
-			</column>
-			
-			<column name="active" type="boolean" defaultValueBoolean="true">
-				<constraints nullable="false"/>
-			</column>
-			
-			<column name="name" type="varchar(1023)">
-				<constraints nullable="false" unique="true" uniqueConstraintName="UC_PRINCIPAL_NAME"/>
-			</column>
-			
-			<column name="created" type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
-			</column>
-			
-			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
-				<constraints nullable="false"/>
-			</column>			
-		</createTable>
-	</changeSet>
-	
-<!-- 	<changeSet id="v1_130915_setup_authorization" author="orlin" context="setup"> -->
-		
-<!-- 	</changeSet> -->
 
+	<changeSet id="v1_130914_setup_authentication" author="orlin" context="setup">
+		<!-- Security Principal -->
+		<createTable tableName="SecurityPrincipal">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_SECURITY_PRINCIPAL_ID" />
+			</column>
+
+			<column name="active" type="boolean" defaultValueBoolean="true">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="name" type="varchar(1023)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="UC_PRINCIPAL_NAME" />
+			</column>
+
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+
+
+		<!-- Security Group -->
+		<createTable tableName="SecurityGroup">
+			<column name="principalId" type="int">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_SECURITY_GROUP_ID" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_PRINCIPALID" referencedTableName="SecurityPrincipal" baseColumnNames="principalId"
+			baseTableName="SecurityGroup" referencedColumnNames="id" onDelete="CASCADE" />
+
+
+
+		<!-- Security User -->
+		<createTable tableName="SecurityUser">
+			<column name="principalId" type="int">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_SECURITY_USER_ID" />
+			</column>
+
+			<column name="loggable" type="boolean" defaultValueBoolean="true">
+				<constraints nullable="false" />
+			</column>
+			
+			<column name="email" type="varchar(1024)">
+				<constraints nullable="false"  unique="true" uniqueConstraintName="UC_SECURITY_USER_EMAIL"/>
+			</column>
+			
+			<column name="securityDbLoginId" type="int">
+				<constraints nullable="true" unique="true" uniqueConstraintName="UC_SECURITY_USER_DB_LOGIN"/>
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_SECURITY_USER_PRINCIPALID" referencedTableName="SecurityPrincipal" baseColumnNames="principalId"
+			baseTableName="SecurityUser" referencedColumnNames="id" onDelete="CASCADE" />
+
+
+
+		<!-- Security DB Login -->
+		<createTable tableName="SecurityDBLogin">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="PK_SECURITY_DB_LOGIN_ID"/>
+			</column>
+			
+			<column name="encryptedPassword" type="varchar(2048)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint constraintName="FK_SECURITY_USER_DB_LOGIN" referencedTableName="SecurityDBLogin" baseColumnNames="securityDbLoginId"
+			baseTableName="SecurityUser" referencedColumnNames="id" onDelete="CASCADE" />
+		
+		
+		<createTable tableName="SecurityGroupToUser">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="PK_SECURITY_GROUP_TO_USER" />
+			</column>
+			
+			<column name="securityGroupId" type="int">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="securityUserId" type="int">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addUniqueConstraint tableName="SecurityGroupToUser" columnNames="securityGroupId, securityUserId" constraintName="UC_SECURITY_GROUP_TO_USER_GROUP_AND_USER" />
+		
+		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_GROUP_ID" referencedTableName="SecurityGroup" baseColumnNames="securityGroupId"
+			baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
+			
+		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_USER_ID" referencedTableName="SecurityGroup" baseColumnNames="securityUserId"
+			baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
+	</changeSet>
+
+
+	<!-- <changeSet id="v1_130915_setup_authorization" author="orlin" context="setup"> -->
+
+	<!-- </changeSet> -->
 </databaseChangeLog>	
