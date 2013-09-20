@@ -105,7 +105,7 @@ CountryDao countryDao = countryService.loadByFilter(new CountryFilter(null, null
 			addressService.delete(saved);
 		}
 		
-		CountryDao countryDao = countryService.loadByFilter(new CountryFilter("ISO1", null, null));
+		CountryDao countryDao = countryService.loadByFilter(new CountryFilter("ISO1", "ISO1", "ZIP1"));
 		
 		countryService.delete(countryDao);
 		em.getTransaction().commit();

@@ -11,10 +11,22 @@
 <!-- 2. populate: Populating the DB with Productive data -->
 <!-- 3. dev: Populate the DB with Development/Test data -->
 
+
+<!-- Constraint naming convention -->
+<!-- <constraint_type>_<table_name>_<attribute> -->
+<!-- Constraint types are: -->
+<!-- 1. UQ: unique -->
+<!-- 2. FK: foreign -->
+<!-- 3. PK: primary key -->
+
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<property name="now" value="sysdate" dbms="oracle" />
+	<property name="now" value="now()" dbms="mysql" />
+	<property name="now" value="CURRENT_TIMESTAMP" dbms="postgresql" />
 
 
 	<include file="v1/v1.0.xml" relativeToChangelogFile="true"/>

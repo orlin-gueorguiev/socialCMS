@@ -1,6 +1,5 @@
 package com.github.orlin.socialCMS.database.services.interfaces;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.github.orlin.socialCMS.database.general.Filter;

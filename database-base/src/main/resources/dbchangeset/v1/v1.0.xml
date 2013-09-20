@@ -2,10 +2,12 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd" logicalFilePath="v1/v1.0">
 
+
 	<changeSet id="v1_130911_generate_country" author="orlin" context="setup">
+	
 		<createTable tableName="Country">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_COUNTRY_ID" />
 			</column>
 
 			<column name="nameInDefaultLanguage" type="varchar(255)">
@@ -15,9 +17,16 @@
 			<column name="zipCodePrefix" type="varchar(255)" />
 
 			<column name="isoCountryCode" type="varchar(255)">
-				<constraints nullable="false" unique="true" uniqueConstraintName="COUNTRY_MUST_HAVE_UNIQUE_ISO_CODE" />
+				<constraints nullable="false" unique="true" uniqueConstraintName="UC_COUNTRY_ISO" />
 			</column>
 
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
 		</createTable>
 	</changeSet>
 
@@ -38,7 +47,7 @@
 	<changeSet id="v1_130911_generate_address" author="orlin" context="setup">
 		<createTable tableName="Address">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_ADDRESS_ID" />
 			</column>
 
 			<column name="countryId" type="int">
@@ -51,6 +60,14 @@
 
 			<column name="street" type="varchar(255)">
 				<constraints nullable="false" />
+			</column>
+			
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
 			</column>
 		</createTable>
 
@@ -69,19 +86,27 @@
 	<changeSet id="v1_130911_generate_WebPresence" author="orlin" context="setup">
 		<createTable tableName="WebPresence">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_WEBPRESENCE_ID"/>
 			</column>
 
 			<column name="email" type="varchar(255)" />
 
 			<column name="webpage" type="varchar(511)" />
+			
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>			
 		</createTable>
 	</changeSet>
 
 	<changeSet id="v1_130911_generate_Company" author="orlin" context="dev">
 		<createTable tableName="Company">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_COMPANY_ID"/>
 			</column>
 
 			<column name="name" type="varchar(255)">
@@ -92,7 +117,13 @@
 
 			<column name="addressId" type="int" />
 
-
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
 		</createTable>
 
 		<addForeignKeyConstraint constraintName="FK_COMPANY_WEBPRESENCEID" referencedTableName="WebPresence" baseColumnNames="webpresenceId"
@@ -107,7 +138,7 @@
 	<changeSet id="v1_130911_generate_Person" author="orlin" context="setup">
 		<createTable tableName="Person">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
+				<constraints primaryKey="true" nullable="false" primaryKeyName="PK_PERSON_ID" />
 			</column>
 
 			<column name="firstName" type="varchar(255)" />
@@ -119,6 +150,14 @@
 			<column name="addressId" type="int" />
 
 			<column name="companyId" type="int" />
+			
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>			
 		</createTable>
 
 		<addForeignKeyConstraint constraintName="FK_PERSON_WEBPRESENCEID" referencedTableName="WebPresence" baseColumnNames="webpresenceId"
@@ -151,15 +190,33 @@
 			<column name="companyId" value="1" />
 		</insert>
 	</changeSet>
-
-	<changeSet id="v1_130911_add_CompanyStatus" author="orlin" context="setup">
-		<addColumn tableName="Company">
-			<column name="status" type="int" defaultValue="0" />
-		</addColumn>
+	
+	<changeSet id="v1_130914_setup_authentication" author="orlin" context="setup">
+		<createTable tableName="Principal">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			
+			<column name="active" type="boolean" defaultValueBoolean="true">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="name" type="varchar(1023)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="UC_PRINCIPAL_NAME"/>
+			</column>
+			
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>
+			
+			<column name="lastModified"  type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false"/>
+			</column>			
+		</createTable>
 	</changeSet>
-
-	<changeSet id="v1_130911_add_CompanyStatus_NotNull" author="orlin" context="setup">
-		<addNotNullConstraint tableName="Company" columnName="status" />
-	</changeSet>
+	
+<!-- 	<changeSet id="v1_130915_setup_authorization" author="orlin" context="setup"> -->
+		
+<!-- 	</changeSet> -->
 
 </databaseChangeLog>	
