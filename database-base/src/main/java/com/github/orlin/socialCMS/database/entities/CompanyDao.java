@@ -1,5 +1,6 @@
 package com.github.orlin.socialCMS.database.entities;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.github.orlin.socialCMS.database.general.DBEntity;
@@ -30,6 +35,7 @@ public class CompanyDao extends DBEntity {
 	private AddressDao address;
 	private WebPresenceDao webPresence;
 	private CompanyStatus status = CompanyStatus.NO_STATUS;
+	private Calendar created, lastModified;
 	
 	
 	/**
@@ -124,4 +130,39 @@ public class CompanyDao extends DBEntity {
 	public void setStatus(CompanyStatus status) {
 		this.status = status;
 	}
+	
+	@Override
+	@Column(name="`created`")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getCreated() {
+		return this.created;
+	}
+
+
+	@Override
+	@Column(name="`lastModified`")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getLastModified() {
+		return this.lastModified;
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		this.lastModified = Calendar.getInstance();
+	}
+
+	protected void setCreated(Calendar date) {
+		this.created = date;
+	}
+	
+	protected void setLastModified(Calendar date) {
+		this.lastModified = date;
+	}
+	
+	@PrePersist
+	public void preCreate() {
+		Calendar c = Calendar.getInstance();
+		this.lastModified = created = c; 
+	}
+
 }

@@ -222,6 +222,14 @@
 			<column name="principalId" type="int">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_SECURITY_GROUP_ID" />
 			</column>
+			
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>			
 		</createTable>
 
 		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_PRINCIPALID" referencedTableName="SecurityPrincipal" baseColumnNames="principalId"
@@ -238,13 +246,21 @@
 			<column name="loggable" type="boolean" defaultValueBoolean="true">
 				<constraints nullable="false" />
 			</column>
-			
+
 			<column name="email" type="varchar(1024)">
-				<constraints nullable="false"  unique="true" uniqueConstraintName="UC_SECURITY_USER_EMAIL"/>
+				<constraints nullable="false" unique="true" uniqueConstraintName="UC_SECURITY_USER_EMAIL" />
 			</column>
-			
+
 			<column name="securityDbLoginId" type="int">
-				<constraints nullable="true" unique="true" uniqueConstraintName="UC_SECURITY_USER_DB_LOGIN"/>
+				<constraints nullable="true" unique="true" uniqueConstraintName="UC_SECURITY_USER_DB_LOGIN" />
+			</column>
+
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
 			</column>
 		</createTable>
 
@@ -256,39 +272,55 @@
 		<!-- Security DB Login -->
 		<createTable tableName="SecurityDBLogin">
 			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" primaryKeyName="PK_SECURITY_DB_LOGIN_ID"/>
+				<constraints primaryKey="true" primaryKeyName="PK_SECURITY_DB_LOGIN_ID" />
+			</column>
+
+			<column name="encryptedPassword" type="varchar(2048)">
+				<constraints nullable="false" />
 			</column>
 			
-			<column name="encryptedPassword" type="varchar(2048)">
-				<constraints nullable="false"/>
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
 			</column>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>			
 		</createTable>
 
 		<addForeignKeyConstraint constraintName="FK_SECURITY_USER_DB_LOGIN" referencedTableName="SecurityDBLogin" baseColumnNames="securityDbLoginId"
 			baseTableName="SecurityUser" referencedColumnNames="id" onDelete="CASCADE" />
-		
-		
+
+
 		<createTable tableName="SecurityGroupToUser">
 			<column name="id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" primaryKeyName="PK_SECURITY_GROUP_TO_USER" />
 			</column>
-			
+
 			<column name="securityGroupId" type="int">
-				<constraints nullable="false"/>
+				<constraints nullable="false" />
 			</column>
-			
+
 			<column name="securityUserId" type="int">
 				<constraints nullable="false" />
 			</column>
-		</createTable>
-		
-		<addUniqueConstraint tableName="SecurityGroupToUser" columnNames="securityGroupId, securityUserId" constraintName="UC_SECURITY_GROUP_TO_USER_GROUP_AND_USER" />
-		
-		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_GROUP_ID" referencedTableName="SecurityGroup" baseColumnNames="securityGroupId"
-			baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
 			
-		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_USER_ID" referencedTableName="SecurityGroup" baseColumnNames="securityUserId"
-			baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
+			<column name="created" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="lastModified" type="datetime" defaultValueComputed="${now}">
+				<constraints nullable="false" />
+			</column>			
+		</createTable>
+
+		<addUniqueConstraint tableName="SecurityGroupToUser" columnNames="securityGroupId, securityUserId" constraintName="UC_SECURITY_GROUP_TO_USER_GROUP_AND_USER" />
+
+		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_GROUP_ID" referencedTableName="SecurityGroup"
+			baseColumnNames="securityGroupId" baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
+
+		<addForeignKeyConstraint constraintName="FK_SECURITY_GROUP_TO_USER_GROUP_SECURITY_USER_ID" referencedTableName="SecurityGroup"
+			baseColumnNames="securityUserId" baseTableName="SecurityGroupToUser" referencedColumnNames="principalId" onDelete="CASCADE" />
 	</changeSet>
 
 

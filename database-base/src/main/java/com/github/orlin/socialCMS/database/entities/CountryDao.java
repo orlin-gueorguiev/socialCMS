@@ -1,11 +1,17 @@
 package com.github.orlin.socialCMS.database.entities;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.github.orlin.socialCMS.database.general.DBEntity;
 
@@ -17,6 +23,7 @@ public class CountryDao extends DBEntity {
 	private String nameInDefaultLanguage;
 	private String zipCodePrefix;
 	private String isoCountryCode;
+	private Calendar created, lastModified;
 
 	
 	@Column(name="`nameInDefaultLanguage`", nullable=false)
@@ -117,4 +124,39 @@ public class CountryDao extends DBEntity {
 			return false;
 		return true;
 	}
+	
+	@Override
+	@Column(name="`created`")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getCreated() {
+		return this.created;
+	}
+
+
+	@Override
+	@Column(name="`lastModified`")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Calendar getLastModified() {
+		return this.lastModified;
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		this.lastModified = Calendar.getInstance();
+	}
+
+	protected void setCreated(Calendar date) {
+		this.created = date;
+	}
+	
+	protected void setLastModified(Calendar date) {
+		this.lastModified = date;
+	}
+	
+	@PrePersist
+	public void preCreate() {
+		Calendar c = Calendar.getInstance();
+		this.lastModified = created = c; 
+	}
+
 }

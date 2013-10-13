@@ -8,6 +8,11 @@ import com.github.orlin.socialCMS.database.entities.AddressDao;
 import com.github.orlin.socialCMS.database.filters.AddressFilter;
 import com.github.orlin.socialCMS.database.general.GenericDBService;
 
+/**
+ * A Basic test class, which initiates all teh general stuff, such as the entity manager, etc.
+ * @author orlin
+ *
+ */
 public class BasicTest {
 	public static EntityManager em = TestDBService.getEntityManager();
 	
