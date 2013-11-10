@@ -58,7 +58,6 @@ import com.github.orlin.socialCMS.rest.jaxb.StandartRestReturnObject;
  * 
  */
 
-// TODO write documentation
 public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObject> {
 
 	/**
@@ -89,6 +88,14 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	 * @return the DTO
 	 */
 	public abstract T postEntity(MultivaluedMap<String, String> form);
+	
+//	/**
+//	 * Poulates the filter with specific for the entity search data
+//	 * @param form The form, fr
+//	 * @param filter
+//	 * @return
+//	 */
+//	public abstract F populateFilter(MultivaluedMap<String, String> form, F filter);
 	
 	public DBService<T, F> service;
 
