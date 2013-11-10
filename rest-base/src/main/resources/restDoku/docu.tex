@@ -1,0 +1,67 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage[utf8]{inputenc}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}} % Generic publisher logo
+
+\newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\noindent\Huge\bfseries REST API \\documentation}\\[2\baselineskip] % Title
+{\large \textit{\date{}}}\\[4\baselineskip] % Tagline or further description
+{\Large \textsc{Orlin Gueorguiev}} % Author name
+
+\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+
+%{\noindent The Publisher \plogo}\\[\baselineskip] % Publisher and logo
+}}
+\endgroup}
+
+\newcommand{\thead}[1]{\textbf{\large{#1}}}
+
+\begin{document}
+
+\titleGM 
+
+\tableofcontents
+
+\chapter{General concepts}
+\label{chap:general}
+
+TODO
+
+\chapter{Rest Calls}
+\label{chap:restCalls}
+
+\section{Default search operations}
+\label{sec:defaultsearch}
+The default
+
+
+\section{Country}
+\label{sec:country}
+
+\subsection{Create a country}
+\label{s:ccountry}
+
+\begin{tabular}{l | c | l}
+\thead{Param} & \thead{Optional} & \thead{Description}\\
+\hline
+id & true & Support the id, if you wish to update an already existing entity\\
+name & false & The name of the country \\
+zipCodePrefix & false & The zip code prefix, for example DE for Germany \\
+isoCountryCode & false & The ISO country code, for example D for Germany
+ 
+\end{tabular} 
+
+
+
+
+\end{document}
