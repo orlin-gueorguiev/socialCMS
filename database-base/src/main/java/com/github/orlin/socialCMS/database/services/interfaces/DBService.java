@@ -25,7 +25,7 @@ public interface DBService<T, F extends Filter> {
 	 * Saves (or updates) the object to the DB
 	 * @param savable The object to save
 	 */
-	public void save(T savable);
+	public T save(T savable);
 	
 	/**
 	 * Deletes the object from the DB. If the object was not persisted, does nothing.
@@ -69,5 +69,12 @@ public interface DBService<T, F extends Filter> {
 	/**
 	 * @return Returns the size of all elements (of this type), which are in the db
 	 */
-	public int getSize(); 
+	public Long getSize(); 
+	
+	
+	/**
+	 * @param filter
+	 * @return Returns the size of all elements (of this type) by filter
+	 */
+	public Long getSizeByFilter(F filter);
 }

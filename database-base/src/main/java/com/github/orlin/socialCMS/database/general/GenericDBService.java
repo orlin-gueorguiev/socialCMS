@@ -8,16 +8,20 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.github.orlin.socialCMS.database.exceptions.TooManyAnswersRuntimeException;
+import com.github.orlin.socialCMS.database.services.interfaces.DBService;
 
 public abstract class GenericDBService<T extends DBEntity, F extends Filter> implements DBService<T, F> {
 
 	public abstract Class<T> getObjectClass();
 
 	public abstract CriteriaQuery<T> generateCriteria(F filter, CriteriaQuery<T> cq, CriteriaBuilder cb);
+	
+	public abstract F getNewFilterInstance();
 
-	protected static final EntityManager em;
+	protected transient static final EntityManager em;
 
 	static {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.github.orlin.socialCMS.database.entities");
@@ -30,11 +34,12 @@ public abstract class GenericDBService<T extends DBEntity, F extends Filter> imp
 	}
 
 	@Override
-	public void save(T savable) {
+	public T save(T savable) {
 		if(savable.getId() == null) {
 			em.persist(savable);
+			return savable;
 		} else {
-			em.merge(savable);
+			return em.merge(savable);
 		}
 	}
 
@@ -72,17 +77,23 @@ public abstract class GenericDBService<T extends DBEntity, F extends Filter> imp
 
 	@Override
 	public final List<T> loadAll() {
-		return loadAllByFilter(null);
+		return loadAllByFilter(getNewFilterInstance());
 	}
 
 	@Override
-	public final int getSize() {
-		return this.getSizeByFilter(null);
+	public final Long getSize() {
+		return this.getSizeByFilter(getNewFilterInstance());
 	}
 
 	@Override
-	public final int getSizeByFilter(final F filter) {
-		return loadAllByFilter(filter).size();
+	public final Long getSizeByFilter(final F filter) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cq = builder.createQuery(Long.class);
+		Root<T> from = cq.from(getObjectClass());
+		CriteriaQuery<Long> select = cq.select(builder.count(from));		
+		Long count = em.createQuery(select).getSingleResult();
+		
+		return count;
 	}
 
 	@Override

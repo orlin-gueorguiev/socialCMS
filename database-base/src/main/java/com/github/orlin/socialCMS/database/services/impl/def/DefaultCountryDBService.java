@@ -9,7 +9,7 @@ import com.github.orlin.socialCMS.database.filters.CountryFilter;
 import com.github.orlin.socialCMS.database.general.GenericDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.CountryDBService;
 
-public class DefaultCountryDBService extends GenericDBService<CountryDao, CountryFilter> implements CountryDBService<CountryDao, CountryFilter> {
+public class DefaultCountryDBService extends GenericDBService<CountryDao, CountryFilter> implements CountryDBService {
 
 	@Override
 	public Class<CountryDao> getObjectClass() {
@@ -38,5 +38,10 @@ public class DefaultCountryDBService extends GenericDBService<CountryDao, Countr
 		}
 
 		return cq;
+	}
+
+	@Override
+	public CountryFilter getNewFilterInstance() {
+		return new CountryFilter();
 	}
 }

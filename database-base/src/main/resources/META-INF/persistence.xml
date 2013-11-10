@@ -3,7 +3,7 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
         version="2.0">
     <persistence-unit name="com.github.orlin.socialCMS.database.entities">
-        <description>Includes all the entities from database-base project</description>
+    	<description>Includes all the entities from database-base project</description>
         
         <class>com.github.orlin.socialCMS.database.entities.AddressDao</class>
         <class>com.github.orlin.socialCMS.database.entities.CompanyDao</class>

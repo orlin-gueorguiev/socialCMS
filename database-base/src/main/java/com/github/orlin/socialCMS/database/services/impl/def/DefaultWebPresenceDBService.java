@@ -10,7 +10,7 @@ import com.github.orlin.socialCMS.database.general.GenericDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.WebPresenceDBService;
 
 public class DefaultWebPresenceDBService extends GenericDBService<WebPresenceDao, WebPresenceFilter> implements
-		WebPresenceDBService<WebPresenceDao, WebPresenceFilter> {
+		WebPresenceDBService {
 
 	@Override
 	public WebPresenceDao create() {
@@ -34,5 +34,10 @@ public class DefaultWebPresenceDBService extends GenericDBService<WebPresenceDao
 		 }
 		
 		return cq;
+	}
+
+	@Override
+	public WebPresenceFilter getNewFilterInstance() {
+		return new WebPresenceFilter();
 	}
 }

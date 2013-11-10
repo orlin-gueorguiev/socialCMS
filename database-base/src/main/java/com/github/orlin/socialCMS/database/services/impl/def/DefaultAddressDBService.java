@@ -14,7 +14,7 @@ import com.github.orlin.socialCMS.database.filters.AddressFilter;
 import com.github.orlin.socialCMS.database.general.GenericDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.AddressDBService;
 
-public class DefaultAddressDBService extends GenericDBService<AddressDao, AddressFilter> implements AddressDBService<AddressDao, AddressFilter> {
+public class DefaultAddressDBService extends GenericDBService<AddressDao, AddressFilter> implements AddressDBService {
 	private static final Logger log = Logger.getLogger(DefaultAddressDBService.class.toString());
 
 	@Override
@@ -68,5 +68,10 @@ public class DefaultAddressDBService extends GenericDBService<AddressDao, Addres
 		}
 
 		return cq;
+	}
+
+	@Override
+	public AddressFilter getNewFilterInstance() {
+		return new AddressFilter();
 	}
 }

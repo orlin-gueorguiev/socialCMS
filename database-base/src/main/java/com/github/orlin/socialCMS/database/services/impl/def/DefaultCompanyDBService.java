@@ -10,7 +10,7 @@ import com.github.orlin.socialCMS.database.services.interfaces.CompanyDBService;
 
 public class DefaultCompanyDBService extends
 		GenericDBService<CompanyDao, CompanyFilter> implements
-		CompanyDBService<CompanyDao, CompanyFilter> {
+		CompanyDBService {
 
 	@Override
 	public Class<CompanyDao> getObjectClass() {
@@ -26,5 +26,10 @@ public class DefaultCompanyDBService extends
 	public CriteriaQuery<CompanyDao> generateCriteria(CompanyFilter filter,
 			CriteriaQuery<CompanyDao> cq, CriteriaBuilder cb) {
 		return cq;
+	}
+
+	@Override
+	public CompanyFilter getNewFilterInstance() {
+		return new CompanyFilter();
 	}
 }

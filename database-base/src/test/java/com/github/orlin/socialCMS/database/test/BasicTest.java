@@ -37,6 +37,11 @@ public class BasicTest {
 		public CriteriaQuery<AddressDao> generateCriteria(AddressFilter filter, CriteriaQuery<AddressDao> cq, CriteriaBuilder cb) {
 			return null;
 		}
+
+		@Override
+		public AddressFilter getNewFilterInstance() {
+			return new AddressFilter();
+		}
 		
 	}
 }

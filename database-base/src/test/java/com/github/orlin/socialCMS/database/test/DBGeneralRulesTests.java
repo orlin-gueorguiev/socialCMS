@@ -16,7 +16,7 @@ import com.github.orlin.socialCMS.database.services.interfaces.CountryDBService;
  *
  */
 public class DBGeneralRulesTests {
-	public CountryDBService<CountryDao, CountryFilter> countryService = new DefaultCountryDBService();
+	public CountryDBService countryService = new DefaultCountryDBService();
 
 	EntityManager em = BasicTest.em;
 
