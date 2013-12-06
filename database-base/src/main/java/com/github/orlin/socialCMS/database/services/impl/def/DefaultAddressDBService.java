@@ -3,6 +3,7 @@ package com.github.orlin.socialCMS.database.services.impl.def;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -15,6 +16,10 @@ import com.github.orlin.socialCMS.database.general.GenericDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.AddressDBService;
 
 public class DefaultAddressDBService extends GenericDBService<AddressDao, AddressFilter> implements AddressDBService {
+	public DefaultAddressDBService(EntityManager em) {
+		super(em);
+	}
+
 	private static final Logger log = Logger.getLogger(DefaultAddressDBService.class.toString());
 
 	@Override

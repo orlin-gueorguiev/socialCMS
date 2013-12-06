@@ -17,6 +17,11 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.orlin.socialCMS.database.general.Filter;
 import com.github.orlin.socialCMS.database.services.interfaces.DBService;
@@ -58,6 +63,7 @@ import com.github.orlin.socialCMS.rest.jaxb.StandartRestReturnObject;
  * 
  */
 
+@Service
 public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObject> {
 
 	/**
@@ -96,12 +102,6 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 //	 * @return
 //	 */
 //	public abstract F populateFilter(MultivaluedMap<String, String> form, F filter);
-	
-	public DBService<T, F> service;
-
-	{
-		service = getDBService();
-	}
 
 	/**
 	 * @return Returns the human readable name of the entity, for example
@@ -110,31 +110,33 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	public abstract String getEntityName();
 
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Path("{entityId}")
-	public String getById(@PathParam("entityId") Long entityId) {
-		T entity = service.load(entityId);
+	public J getById(@PathParam("entityId") Long entityId) {
+		T entity = getDBService().load(entityId);
 
 		if (entity == null) {
 			throw new WebApplicationException(404);
 		}
-
-		return entity.toString();
+		
+		return getXmlRepresentation(entity);
 	}
 
 	@DELETE
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Path("{entityId}")
-	public String deleteById(@PathParam("entityId") Long entityId) {
-		T entity = service.load(entityId);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public Response deleteById(@PathParam("entityId") Long entityId) {
+		T entity = getDBService().load(entityId);
 
 		if (entity == null) {
-			throw new WebApplicationException(404);
+			return Response.status(Status.NOT_FOUND).build();
 		}
 
-		service.delete(entity);
+		getDBService().delete(entity);
 
-		throw new WebApplicationException(204);
+
+		return Response.status(204).build();
 	}
 
 	@GET
@@ -145,10 +147,10 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 		filter.setCount(pagination);
 		filter.setFirstResult(startFrom);
 		
-		StandartRestReturnObject<J> restQueryAnswer = new StandartRestReturnObject<>();
-		restQueryAnswer.setTotalObjects(service.getSizeByFilter(filter));
-		List<T> loadAllByFilter = service.loadAllByFilter(filter);
-		List<J> converted = new LinkedList<>();
+		StandartRestReturnObject<J> restQueryAnswer = new StandartRestReturnObject<J>();
+		restQueryAnswer.setTotalObjects(getDBService().getSizeByFilter(filter));
+		List<T> loadAllByFilter = getDBService().loadAllByFilter(filter);
+		List<J> converted = new LinkedList<J>();
 		for (T loaded: loadAllByFilter) {
 			J representation = getXmlRepresentation(loaded);
 			converted.add(representation);
@@ -161,8 +163,11 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	@POST
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Response post(MultivaluedMap<String, String> form) {
 		T createdOrUpdatedEntity = postEntity(form);
+
+		getDBService().save(createdOrUpdatedEntity);
 		
 		J entity = getXmlRepresentation(createdOrUpdatedEntity);
 
@@ -174,6 +179,7 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	@PUT
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Response put(MultivaluedMap<String, String> form) {
 		return post(form);
 	}

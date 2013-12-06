@@ -1,5 +1,6 @@
 package com.github.orlin.socialCMS.database.services.impl.def;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -10,6 +11,10 @@ import com.github.orlin.socialCMS.database.general.GenericDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.CountryDBService;
 
 public class DefaultCountryDBService extends GenericDBService<CountryDao, CountryFilter> implements CountryDBService {
+
+	public DefaultCountryDBService(EntityManager em) {
+		super(em);
+	}
 
 	@Override
 	public Class<CountryDao> getObjectClass() {

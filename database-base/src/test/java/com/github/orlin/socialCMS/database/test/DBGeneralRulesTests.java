@@ -16,9 +16,11 @@ import com.github.orlin.socialCMS.database.services.interfaces.CountryDBService;
  *
  */
 public class DBGeneralRulesTests {
-	public CountryDBService countryService = new DefaultCountryDBService();
-
 	EntityManager em = BasicTest.em;
+	
+	public CountryDBService countryService = new DefaultCountryDBService(em);
+
+	
 
 	@Test
 	public void _01testTimestamp() {

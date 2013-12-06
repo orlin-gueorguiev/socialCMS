@@ -3,8 +3,6 @@ package com.github.orlin.socialCMS.database.general;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,18 +13,17 @@ import com.github.orlin.socialCMS.database.services.interfaces.DBService;
 
 public abstract class GenericDBService<T extends DBEntity, F extends Filter> implements DBService<T, F> {
 
+	public GenericDBService(EntityManager em) {
+		this.em = em;
+	}
+	
 	public abstract Class<T> getObjectClass();
 
 	public abstract CriteriaQuery<T> generateCriteria(F filter, CriteriaQuery<T> cq, CriteriaBuilder cb);
 	
 	public abstract F getNewFilterInstance();
 
-	protected transient static final EntityManager em;
-
-	static {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.github.orlin.socialCMS.database.entities");
-		em = emf.createEntityManager();
-	};
+	protected final EntityManager em;
 
 	@Override
 	public T load(final Long id) {
@@ -109,5 +106,10 @@ public abstract class GenericDBService<T extends DBEntity, F extends Filter> imp
 
 		return null;
 
+	}
+	
+	@Override
+	public EntityManager getEntityManager() {
+		return em;
 	}
 }

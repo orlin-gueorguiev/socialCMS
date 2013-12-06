@@ -2,6 +2,8 @@ package com.github.orlin.socialCMS.database.services.interfaces;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.github.orlin.socialCMS.database.general.Filter;
 
 /**
@@ -77,4 +79,9 @@ public interface DBService<T, F extends Filter> {
 	 * @return Returns the size of all elements (of this type) by filter
 	 */
 	public Long getSizeByFilter(F filter);
+	
+	/**
+	 * @return Returns the entity manager in use
+	 */
+	public EntityManager getEntityManager();
 }

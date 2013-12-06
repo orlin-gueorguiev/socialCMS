@@ -35,21 +35,37 @@
 \chapter{General concepts}
 \label{chap:general}
 
-TODO
 
 \chapter{Rest Calls}
 \label{chap:restCalls}
 
-\section{Default search operations}
+\section{General operations}
 \label{sec:defaultsearch}
 
+
+\subsection{General search paramethers}
+\label{s:defsearchparams}
 \begin{tabular}{l | c | l}
 \thead{Param} & \thead{Default value} & \thead{Description}\\
 \hline
-pagination & 10 & How many elements should be shown
+pagination & 10 & How many elements should be shown\\
 startFrom & 0 & Which should be the first element to be shown, counting starts from 0
- 
-\end{tabular} 
+\end{tabular}
+All search paramethers are optional.
+
+\textbf{Example:} \textit{socialCRMRest/country?startFrom=45\&pagination=15}
+
+\subsection{Get by id}
+\label{s:getById}
+We use the standard REST notation: \textit{\textless{}entity\textgreater/id}\\
+\textbf{Example:} \textit{socialCRMRest/country/15}
+
+\subsection{Delete by id}
+\label{s:deleteById}
+We use the standard REST notation: \textit{\textless{}entity\textgreater/id}\\
+\textbf{Example:} \textit{socialCRMRest/country/15}
+
+
 \section{Country}
 \label{sec:country}
 

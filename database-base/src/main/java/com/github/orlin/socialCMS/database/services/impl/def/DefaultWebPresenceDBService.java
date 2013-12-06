@@ -1,5 +1,6 @@
 package com.github.orlin.socialCMS.database.services.impl.def;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -11,6 +12,10 @@ import com.github.orlin.socialCMS.database.services.interfaces.WebPresenceDBServ
 
 public class DefaultWebPresenceDBService extends GenericDBService<WebPresenceDao, WebPresenceFilter> implements
 		WebPresenceDBService {
+
+	public DefaultWebPresenceDBService(EntityManager em) {
+		super(em);
+	}
 
 	@Override
 	public WebPresenceDao create() {

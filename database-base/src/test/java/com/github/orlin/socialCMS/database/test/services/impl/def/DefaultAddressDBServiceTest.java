@@ -20,10 +20,11 @@ import com.github.orlin.socialCMS.database.services.interfaces.CountryDBService;
 import com.github.orlin.socialCMS.database.test.BasicTest;
 
 public class DefaultAddressDBServiceTest {
-	public AddressDBService addressService = new DefaultAddressDBService();
-	public CountryDBService countryService = new DefaultCountryDBService();
-	
 	EntityManager em = BasicTest.em;
+	public AddressDBService addressService = new DefaultAddressDBService(em);
+	public CountryDBService countryService = new DefaultCountryDBService(em);
+	
+	
 	
 	private int addressCount = 5;
 	private List<AddressDao> createdAddresses = new LinkedList<>();

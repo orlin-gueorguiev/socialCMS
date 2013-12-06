@@ -2,8 +2,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
         version="2.0">
-    <persistence-unit name="com.github.orlin.socialCMS.database.entities">
+    <persistence-unit name="socialCMSPersistence">
     	<description>Includes all the entities from database-base project</description>
+    	
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
         
         <class>com.github.orlin.socialCMS.database.entities.AddressDao</class>
         <class>com.github.orlin.socialCMS.database.entities.CompanyDao</class>
