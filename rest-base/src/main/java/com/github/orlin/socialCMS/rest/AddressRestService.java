@@ -18,6 +18,7 @@ import com.github.orlin.socialCMS.database.services.impl.def.DefaultAddressDBSer
 import com.github.orlin.socialCMS.database.services.interfaces.AddressDBService;
 import com.github.orlin.socialCMS.database.services.interfaces.DBService;
 import com.github.orlin.socialCMS.rest.jaxb.DateAdapters;
+import com.github.orlin.socialCMS.rest.misc.Validator;
 
 @Path("/address")
 public class AddressRestService extends DefaultRestService<AddressDao, AddressFilter, AddressRestService.Address> {
@@ -63,16 +64,11 @@ public class AddressRestService extends DefaultRestService<AddressDao, AddressFi
 		dao.setCountry(countryDao);
 		
 		String zipCode = form.getFirst("zipCode");
-		if(!StringUtils.isNumeric(zipCode)) {
-			throw RestInputConstraintViolationException.formInputMissing("zipCode");
-		}
-		
-		dao.setZipCode(Integer.parseInt(zipCode));
+		Integer zip = Validator.validateIntegerInput(zipCode, "zipCode", 1000, 99999);
+		dao.setZipCode(zip);
 		
 		String street = form.getFirst("street");
-		dao.setStreet(street);
-
-		
+		dao.setStreet(Validator.validateStringInput(street, "street", false, 16, 255));	
 		
 		return dao;
 	}
