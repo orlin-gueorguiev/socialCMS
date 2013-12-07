@@ -2,8 +2,6 @@ package com.github.orlin.socialCMS.rest;
 
 import java.util.Calendar;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
 
 import com.github.orlin.socialCMS.database.entities.CountryDao;
 import com.github.orlin.socialCMS.database.filters.CountryFilter;
@@ -22,13 +19,9 @@ import com.github.orlin.socialCMS.database.services.interfaces.DBService;
 import com.github.orlin.socialCMS.rest.jaxb.DateAdapters;
 
 @Path("/country")
-@Service
 public class CountryRestService extends DefaultRestService<CountryDao, CountryFilter, CountryRestService.Country> {
-	
-	@PersistenceContext(name="socialCMSPersistence")
-	private EntityManager entityManager;
 
-	public CountryDBService service = new DefaultCountryDBService(entityManager);
+	public CountryDBService service = new DefaultCountryDBService(getEntityManager());
 		
 	@Override
 	public String getEntityName() {
@@ -105,7 +98,7 @@ public class CountryRestService extends DefaultRestService<CountryDao, CountryFi
 			countryDao = new CountryDao();
 		} else {
 			Long idL = Long.parseLong(id);
-			countryDao = service.load(idL);
+			countryDao = getDBService().load(idL);
 		}
 		
 		String name = form.getFirst("name");

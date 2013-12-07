@@ -3,6 +3,10 @@ package com.github.orlin.socialCMS.rest;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -18,10 +22,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.github.orlin.socialCMS.database.general.Filter;
 import com.github.orlin.socialCMS.database.services.interfaces.DBService;
@@ -63,8 +63,16 @@ import com.github.orlin.socialCMS.rest.jaxb.StandartRestReturnObject;
  * 
  */
 
-@Service
 public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObject> {
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("socialCMSPersistence");
+	private static EntityManager em = emf.createEntityManager();
+	
+	/**
+	 * @return Returns the EntityManager
+	 */
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
 	/**
 	 * @return Returns a new instance of the filter
@@ -125,31 +133,34 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	@DELETE
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Path("{entityId}")
-	@Transactional(propagation=Propagation.REQUIRED)
 	public Response deleteById(@PathParam("entityId") Long entityId) {
-		T entity = getDBService().load(entityId);
+		DBService<T, F> dbService = getDBService();
+		T entity = dbService.load(entityId);
 
 		if (entity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 
-		getDBService().delete(entity);
+		dbService.delete(entity);
 
-
+		EntityTransaction transaction = getNewTransaction();
+		transaction.commit();
+		
 		return Response.status(204).build();
 	}
 
 	@GET
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	public StandartRestReturnObject<J> getAll(@QueryParam("pagination") @DefaultValue("10") Integer pagination, @QueryParam("startFrom") @DefaultValue("0") Integer startFrom) {
-
+		DBService<T, F> dbService = getDBService();
+		
 		F filter = getFilter();
 		filter.setCount(pagination);
 		filter.setFirstResult(startFrom);
 		
 		StandartRestReturnObject<J> restQueryAnswer = new StandartRestReturnObject<J>();
-		restQueryAnswer.setTotalObjects(getDBService().getSizeByFilter(filter));
-		List<T> loadAllByFilter = getDBService().loadAllByFilter(filter);
+		restQueryAnswer.setTotalObjects(dbService.getSizeByFilter(filter));
+		List<T> loadAllByFilter = dbService.loadAllByFilter(filter);
 		List<J> converted = new LinkedList<J>();
 		for (T loaded: loadAllByFilter) {
 			J representation = getXmlRepresentation(loaded);
@@ -163,11 +174,14 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	@POST
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
-	@Transactional(propagation=Propagation.REQUIRED)
 	public Response post(MultivaluedMap<String, String> form) {
 		T createdOrUpdatedEntity = postEntity(form);
 
+		EntityTransaction transaction = getNewTransaction();
+		
 		getDBService().save(createdOrUpdatedEntity);
+		
+		transaction.commit();
 		
 		J entity = getXmlRepresentation(createdOrUpdatedEntity);
 
@@ -176,10 +190,17 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 		return response;
 	}
 
+	private EntityTransaction getNewTransaction() {
+		EntityTransaction transaction = getDBService().getEntityManager().getTransaction();
+		if(!transaction.isActive()) {
+			transaction.begin();
+		}
+		return transaction;
+	}
+
 	@PUT
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
-	@Transactional(propagation=Propagation.REQUIRED)
 	public Response put(MultivaluedMap<String, String> form) {
 		return post(form);
 	}
