@@ -5,7 +5,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.github.orlin.socialCMS.database.entities.AddressDao;
 import com.github.orlin.socialCMS.database.entities.CompanyDao;
 import com.github.orlin.socialCMS.database.filters.CompanyFilter;
 import com.github.orlin.socialCMS.database.general.GenericDBService;
