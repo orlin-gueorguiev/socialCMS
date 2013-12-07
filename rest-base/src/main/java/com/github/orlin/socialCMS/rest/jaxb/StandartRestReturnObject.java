@@ -7,9 +7,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.github.orlin.socialCMS.rest.AddressRestService.Address;
+import com.github.orlin.socialCMS.rest.CompanyRestService.Company;
 import com.github.orlin.socialCMS.rest.CountryRestService.Country;
 import com.github.orlin.socialCMS.rest.JaxBObject;
-import com.github.orlin.socialCMS.rest.WebPresenceWebService.WebPresence;
+import com.github.orlin.socialCMS.rest.PersonRestService.Person;
+import com.github.orlin.socialCMS.rest.WebPresenceRestService.WebPresence;
 
 /**
  * The standard object, which is used when querying REST
@@ -17,7 +19,7 @@ import com.github.orlin.socialCMS.rest.WebPresenceWebService.WebPresence;
  *
  */
 @XmlRootElement
-@XmlSeeAlso({JaxBObject.class, Country.class, Address.class, WebPresence.class})
+@XmlSeeAlso({JaxBObject.class, Country.class, Address.class, WebPresence.class, Person.class, Company.class})
 public class StandartRestReturnObject<J extends JaxBObject> {
 	private Long totalObjects;
 	

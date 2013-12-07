@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +32,6 @@ public class CompanyDao extends DBEntity {
 	private List<PersonDao> contactPersons;
 	private AddressDao address;
 	private WebPresenceDao webPresence;
-	private CompanyStatus status = CompanyStatus.NO_STATUS;
 	private Calendar created, lastModified;
 	
 	
@@ -121,15 +118,15 @@ public class CompanyDao extends DBEntity {
 		this.name = name;
 	}
 	
-	@Column(name="status", nullable=false)
-	@Enumerated(EnumType.ORDINAL)
-	public CompanyStatus getStatus() {
-		return this.status;
-	}
-	
-	public void setStatus(CompanyStatus status) {
-		this.status = status;
-	}
+//	@Column(name="status", nullable=false)
+//	@Enumerated(EnumType.ORDINAL)
+//	public CompanyStatus getStatus() {
+//		return this.status;
+//	}
+//	
+//	public void setStatus(CompanyStatus status) {
+//		this.status = status;
+//	}
 	
 	@Override
 	@Column(name="`created`")

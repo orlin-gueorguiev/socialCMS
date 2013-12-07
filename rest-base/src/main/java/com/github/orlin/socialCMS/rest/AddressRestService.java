@@ -37,6 +37,15 @@ public class AddressRestService extends DefaultRestService<AddressDao, AddressFi
 
 	@Override
 	public Address getXmlRepresentation(AddressDao object) {
+		return AddressRestService.getXmlRepresentationStatic(object);
+	}
+	
+	public static Address getXmlRepresentationStatic(AddressDao object) {
+		if(object == null) {
+			return null;
+		}
+		
+		
 		Address address = new Address();
 		address.id = object.getId();
 		address.country = CountryRestService.getXmlRepresentationStatic(object.getCountry());
@@ -64,7 +73,7 @@ public class AddressRestService extends DefaultRestService<AddressDao, AddressFi
 		dao.setCountry(countryDao);
 		
 		String zipCode = form.getFirst("zipCode");
-		Integer zip = Validator.validateIntegerInput(zipCode, "zipCode", 1000, 99999);
+		Integer zip = Validator.validateIntegerInput(zipCode, "zipCode", 1000, 99999, false);
 		dao.setZipCode(zip);
 		
 		String street = form.getFirst("street");

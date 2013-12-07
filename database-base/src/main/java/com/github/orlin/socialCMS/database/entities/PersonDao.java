@@ -2,12 +2,16 @@ package com.github.orlin.socialCMS.database.entities;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -25,17 +29,15 @@ public class PersonDao extends DBEntity {
 	private String lastName;
 	private CompanyDao company;
 	private Calendar created, lastModified;
+	private AddressDao address;
+	private WebPresenceDao webPresence;
 	
 	public PersonDao() {}
 	
 	public PersonDao(AddressDao address, WebPresenceDao webPresence) {
-		super();
 		this.address = address;
 		this.webPresence = webPresence;
 	}
-
-	private AddressDao address;
-	private WebPresenceDao webPresence;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -48,8 +50,8 @@ public class PersonDao extends DBEntity {
 	}
 
 	
-//	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="addressId")
+	@OneToOne(cascade=CascadeType.REMOVE)
+	@JoinColumn(name="`addressId`")
 	public AddressDao getAddress() {
 		return this.address;
 	}
@@ -60,7 +62,7 @@ public class PersonDao extends DBEntity {
 	}
 
 	
-//	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="`webpresenceId`")
 	public WebPresenceDao getWebPresence() {
 		return this.webPresence;
@@ -72,7 +74,7 @@ public class PersonDao extends DBEntity {
 	}
 
 	
-	@Column(name="firstName")
+	@Column(name="`firstName`")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -83,7 +85,7 @@ public class PersonDao extends DBEntity {
 	}
 
 	
-	@Column(name="lastName")
+	@Column(name="`lastName`")
 	public String getLastName() {
 		return lastName;
 	}
@@ -93,9 +95,8 @@ public class PersonDao extends DBEntity {
 		this.lastName = lastName;
 	}
 
-	
-//	@OneToMany(cascade={}, fetch=FetchType.LAZY)
-	@JoinColumn(name="companyId")
+	@ManyToOne(optional = true, cascade={}, fetch=FetchType.LAZY)
+	@JoinColumn(name="`companyId`", referencedColumnName = "id")
 	public CompanyDao getCompany() {
 		return company;
 	}

@@ -10,10 +10,11 @@ public class RestInputConstraintViolationException extends Exception {
 
 	public enum Type {
 		FORM_INPUT_MISSING("Please supply a form paramether for the field '%s'"),
-		FORM_INPUT_MUST_BE_INTEGER("The input on field '%s' should be an integer from '%d' to '%d'"),
+		FORM_INPUT_MUST_BE_INTEGER("The %soptional input on field '%s' should be an integer from '%d' to '%d'"),
 		ENTITY_NOT_FOUND("Entity of type '%s' with id '%s' was not found"),
 		FORM_INPUT_STRING_CONSTRAINT("Please supply a string between '%d' and '%d' chars for the %soptional paramether '%s'"),
-		FORM_INPUT_STRING_REGEX("Please supply a string less then '%d' chars for the %soptional paramether '%s', which complies with the regexp: '%s'")
+		FORM_INPUT_STRING_REGEX("Please supply a string less then '%d' chars for the %soptional paramether '%s', which complies with the regexp: '%s'"), 
+		FORM_INPUT_MUST_BE_LONG("The %soptional input on field '%s' should be an number from '%d' to '%d'"),
 		;
 		String message;
 		Type(String message) {
@@ -37,8 +38,14 @@ public class RestInputConstraintViolationException extends Exception {
 		return new RestInputConstraintViolationException(Type.ENTITY_NOT_FOUND, entityType, entityId);
 	}
 	
-	public static RestInputConstraintViolationException formInputInteger(String inputId, int min, int max) {
-		return new RestInputConstraintViolationException(Type.FORM_INPUT_MUST_BE_INTEGER, inputId, min, max);
+	public static RestInputConstraintViolationException formInputInteger(String inputId, int min, int max, boolean optional) {
+		String optionalStr = optional ? "" : "non-";
+		return new RestInputConstraintViolationException(Type.FORM_INPUT_MUST_BE_INTEGER, optionalStr, inputId, min, max);
+	}
+	
+	public static RestInputConstraintViolationException formInputLong(String inputId, int min, int max, boolean optional) {
+		String optionalStr = optional ? "" : "non-";
+		return new RestInputConstraintViolationException(Type.FORM_INPUT_MUST_BE_LONG, optionalStr, inputId, min, max);
 	}
 	
 	public static RestInputConstraintViolationException formInputString(String inputId, int min, int max, boolean optional) {

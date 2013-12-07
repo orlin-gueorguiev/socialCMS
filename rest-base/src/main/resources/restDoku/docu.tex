@@ -102,7 +102,7 @@ street & false & The street of the address \\
 \section{Web Presence}
 \label{sec:WebPresence}
 
-Local path is \textbf{/webpresence}.
+Local path is \textbf{/webPresence}.
 
 \subsection{Create a Web Presence}
 \label{s:cWebPresence}
@@ -116,5 +116,39 @@ email & true & The email of the entity \\
  
 \end{tabular} 
 
+\section{Person}
+\label{sec:Person}
+
+\subsection{Create a Person}
+\label{s:cPerson}
+
+\begin{tabular}{l | c | l}
+\thead{Param} & \thead{Optional} & \thead{Description}\\
+\hline
+id & true & Support the id, if you wish to update an already existing entity\\
+firstName & true & First name of the person\\
+lastName & true & Last name of the person\\
+webPresenceId & true & The id of the webpresence of the person\\
+addressId & true & The persons' address\\
+companyId & true & The company, where the person works\\
+ 
+\end{tabular} 
+
+
+\section{Company}
+\label{sec:Company}
+
+\subsection{Create a Company}
+\label{s:cCompany}
+
+\begin{tabular}{l | c | l}
+\thead{Param} & \thead{Optional} & \thead{Description}\\
+\hline
+id & true & Support the id, if you wish to update an already existing entity\\
+name & false & The company name\\
+webPresenceId & true & The company webpage details\\
+addressId & true & The company address\\
+ 
+\end{tabular} 
 
 \end{document}

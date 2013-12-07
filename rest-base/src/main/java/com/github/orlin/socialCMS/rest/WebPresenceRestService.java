@@ -19,8 +19,8 @@ import com.github.orlin.socialCMS.database.services.interfaces.WebPresenceDBServ
 import com.github.orlin.socialCMS.rest.jaxb.DateAdapters;
 import com.github.orlin.socialCMS.rest.misc.Validator;
 
-@Path("/webpresence")
-public class WebPresenceWebService extends DefaultRestService<WebPresenceDao, WebPresenceFilter, WebPresenceWebService.WebPresence> {
+@Path("/webPresence")
+public class WebPresenceRestService extends DefaultRestService<WebPresenceDao, WebPresenceFilter, WebPresenceRestService.WebPresence> {
 	private static final String WEBPAGE_REGEXP = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 	private static final String EMAIL_REGEXP = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$;";
 	public WebPresenceDBService service = new DefaultWebPresenceDBService(getEntityManager());
@@ -39,6 +39,14 @@ public class WebPresenceWebService extends DefaultRestService<WebPresenceDao, We
 
 	@Override
 	public WebPresence getXmlRepresentation(WebPresenceDao object) {
+		return WebPresenceRestService.getXmlRepresentationStatic(object);
+	}	
+	
+	public static WebPresence getXmlRepresentationStatic(WebPresenceDao object) {
+		if(object == null) {
+			return null;
+		}
+		
 		WebPresence wp = new WebPresence();
 		wp.id = object.getId();
 		wp.webpage = object.getWebpage();

@@ -47,6 +47,10 @@ public class CountryRestService extends DefaultRestService<CountryDao, CountryFi
 	}
 	
 	public static Country getXmlRepresentationStatic(CountryDao object) {
+		if(object == null) {
+			return null;
+		}
+		
 		Country country = new Country();
 		country.id = object.getId();
 		country.name = object.getNameInDefaultLanguage();
