@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import com.github.orlin.socialCMS.rest.AddressRestService.Address;
 import com.github.orlin.socialCMS.rest.CountryRestService.Country;
 import com.github.orlin.socialCMS.rest.JaxBObject;
 
@@ -15,7 +16,7 @@ import com.github.orlin.socialCMS.rest.JaxBObject;
  *
  */
 @XmlRootElement
-@XmlSeeAlso({JaxBObject.class, Country.class})
+@XmlSeeAlso({JaxBObject.class, Country.class, Address.class})
 public class StandartRestReturnObject<J extends JaxBObject> {
 	private Long totalObjects;
 	

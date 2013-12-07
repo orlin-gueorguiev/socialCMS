@@ -21,7 +21,7 @@ import com.github.orlin.socialCMS.rest.jaxb.DateAdapters;
 @Path("/country")
 public class CountryRestService extends DefaultRestService<CountryDao, CountryFilter, CountryRestService.Country> {
 
-	public CountryDBService service = new DefaultCountryDBService(getEntityManager());
+	private CountryDBService service = new DefaultCountryDBService(getEntityManager());
 		
 	@Override
 	public String getEntityName() {
@@ -41,15 +41,12 @@ public class CountryRestService extends DefaultRestService<CountryDao, CountryFi
 		return new CountryFilter();
 	}
 
-
-	@Override
-	public CountryDao getEntity() {
-		return new CountryDao();
-	}
-
-
 	@Override
 	public Country getXmlRepresentation(CountryDao object) {
+		return CountryRestService.getXmlRepresentationStatic(object);
+	}
+	
+	public static Country getXmlRepresentationStatic(CountryDao object) {
 		Country country = new Country();
 		country.id = object.getId();
 		country.name = object.getNameInDefaultLanguage();
@@ -61,9 +58,15 @@ public class CountryRestService extends DefaultRestService<CountryDao, CountryFi
 		return country;
 	}
 	
+	
+	
 	@XmlRootElement(name = "country")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class Country extends JaxBObject {
+		public Country() {
+			super("country");
+		}
+
 		public Long id;
 		public String name;
 		public String zipCodePrefix;

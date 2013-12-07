@@ -1,5 +1,6 @@
 package com.github.orlin.socialCMS.rest;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -10,5 +11,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="data")
 public class JaxBObject {
+	
+	public JaxBObject(String type) {
+		this.type = type;
+	}
+	
+	public JaxBObject() {
+		this.type="not set";
+	}
+	
+	@XmlElement
+	public String type;
 
 }

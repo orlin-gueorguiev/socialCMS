@@ -82,7 +82,9 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	/**
 	 * @return Returns a new entity of the specific DTO
 	 */
-	public abstract T getEntity();
+	public final T getEntity() {
+		return getDBService().create();
+	}
 
 	/**
 	 * @return Returns the DB Service for the specific Rest Service
@@ -101,7 +103,7 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	 * @param form the form params
 	 * @return the DTO
 	 */
-	public abstract T postEntity(MultivaluedMap<String, String> form);
+	public abstract T postEntity(MultivaluedMap<String, String> form) throws RestInputConstraintViolationException;
 	
 //	/**
 //	 * Poulates the filter with specific for the entity search data
@@ -175,7 +177,12 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
 	public Response post(MultivaluedMap<String, String> form) {
-		T createdOrUpdatedEntity = postEntity(form);
+		T createdOrUpdatedEntity;
+		try {
+			createdOrUpdatedEntity = postEntity(form);
+		} catch (RestInputConstraintViolationException e) {
+			return Response.status(400).type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+		}
 
 		EntityTransaction transaction = getNewTransaction();
 		
