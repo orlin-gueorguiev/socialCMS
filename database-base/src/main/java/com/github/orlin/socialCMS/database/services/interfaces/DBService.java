@@ -23,6 +23,9 @@ public interface DBService<T, F extends Filter> {
 	 */
 	public T load(Long id);
 	
+	
+	public T loadAsReference(Long id);
+	
 	/**
 	 * Saves (or updates) the object to the DB
 	 * @param savable The object to save

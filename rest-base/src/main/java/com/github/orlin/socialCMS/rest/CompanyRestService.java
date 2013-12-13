@@ -82,7 +82,7 @@ public class CompanyRestService extends DefaultRestService<CompanyDao, CompanyFi
 		String addressId = form.getFirst("addressId");
 		Long addId = Validator.validateLongInput(addressId, "addressId", 1, -1, true);
 		if(addId != null) {
-			AddressDao addressDao = new AddressRestService().getDBService().load(addId);
+			AddressDao addressDao = new AddressRestService().getDBService().loadAsReference(addId);
 			dao.setAddress(addressDao);
 		}
 	}
@@ -91,7 +91,7 @@ public class CompanyRestService extends DefaultRestService<CompanyDao, CompanyFi
 		String webPresenceId = form.getFirst("webPresenceId");
 		Long wpId = Validator.validateLongInput(webPresenceId, "webPresenceId", 1, -1, true);
 		if(wpId != null) {
-			WebPresenceDao loaded = new WebPresenceRestService().getDBService().load(wpId);
+			WebPresenceDao loaded = new WebPresenceRestService().getDBService().loadAsReference(wpId);
 			dao.setWebPresence(loaded);
 		}
 	}

@@ -51,7 +51,6 @@ public class PersonRestService extends DefaultRestService<PersonDao, PersonFilte
 
 	@Override
 	public PersonDao postEntity(MultivaluedMap<String, String> form) throws RestInputConstraintViolationException {
-		// TODO Auto-generated method stub
 		String id = form.getFirst("id");
 		
 		PersonDao dao = null;
@@ -91,7 +90,7 @@ public class PersonRestService extends DefaultRestService<PersonDao, PersonFilte
 		Long addId = Validator.validateLongInput(addressId, "addressId", 1, -1, true);
 		if(addId != null) {
 			AddressRestService addressRestService = new AddressRestService();
-			AddressDao addressDao = addressRestService.getDBService().load(addId);
+			AddressDao addressDao = addressRestService.getDBService().loadAsReference(addId);
 			dao.setAddress(addressDao);
 		}
 	}
@@ -101,7 +100,7 @@ public class PersonRestService extends DefaultRestService<PersonDao, PersonFilte
 		Long wpId = Validator.validateLongInput(webPresenceId, "webPresenceId", 1, -1, true);
 		if(wpId != null) {
 			WebPresenceRestService webPresenceWebService = new WebPresenceRestService();
-			WebPresenceDao wp = webPresenceWebService.getDBService().load(wpId);
+			WebPresenceDao wp = webPresenceWebService.getDBService().loadAsReference(wpId);
 			dao.setWebPresence(wp);
 		}
 	}

@@ -29,6 +29,11 @@ public abstract class GenericDBService<T extends DBEntity, F extends Filter> imp
 	public T load(final Long id) {
 		return em.find(getObjectClass(), id);
 	}
+	
+	@Override
+	public T loadAsReference(final Long id) {
+		return em.getReference(getObjectClass(), id);
+	}
 
 	@Override
 	public T save(T savable) {

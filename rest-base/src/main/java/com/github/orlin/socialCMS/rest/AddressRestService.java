@@ -90,7 +90,7 @@ public class AddressRestService extends DefaultRestService<AddressDao, AddressFi
 		Long countryId = Long.parseLong(country);
 		
 		CountryRestService crs = new CountryRestService();
-		CountryDao countryDao = crs.getDBService().load(countryId);
+		CountryDao countryDao = crs.getDBService().loadAsReference(countryId);
 		
 		if(countryDao == null) {
 			throw RestInputConstraintViolationException.entityNotFound("country", country);
