@@ -1,31 +1,31 @@
-1386451967164|-01 | debug > com.p6spy.engine.common.P6SpyOptions reloading properties
-DB: 23:12:47|-01 | info > No value in environment for: getFilter, using: false
-DB: 23:12:47|-01 | info > No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
-DB: 23:12:47|-01 | info > No value in environment for: getDeregisterDrivers, using: true
-DB: 23:12:47|-01 | info > No value in environment for: getUsePrefix, using: false
-DB: 23:12:47|-01 | info > No value in environment for: getAutoflush, using: true
-DB: 23:12:47|-01 | info > No value in environment for: getExclude, using: 
-DB: 23:12:47|-01 | info > No value in environment for: getExcludecategories, using: info,debug,result,batch
-DB: 23:12:47|-01 | info > No value in environment for: getInclude, using: 
-DB: 23:12:47|-01 | info > No value in environment for: getIncludecategories, using: 
-DB: 23:12:47|-01 | info > No value in environment for: getLogfile, using: spy.log
-DB: 23:12:47|-01 | info > No value in environment for: getRealdriver, using: org.postgresql.Driver
-DB: 23:12:47|-01 | info > No value in environment for: getRealdriver2, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getRealdriver3, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getAppend, using: true
-DB: 23:12:47|-01 | info > No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
-DB: 23:12:47|-01 | info > No value in environment for: getExecutionThreshold, using: 0
-DB: 23:12:47|-01 | info > No value in environment for: getDateformat, using: 'DB:' HH:MM:ss
-DB: 23:12:47|-01 | info > No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@ba62070e
-DB: 23:12:47|-01 | info > No value in environment for: getStackTraceClass, using: 
-DB: 23:12:47|-01 | info > No value in environment for: getSQLExpression, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getReloadProperties, using: false
-DB: 23:12:47|-01 | info > No value in environment for: getReloadPropertiesInterval, using: 60
-DB: 23:12:47|-01 | info > No value in environment for: getJNDIContextFactory, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getJNDIContextProviderURL, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getJNDIContextCustom, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getRealDataSource, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getRealDataSourceClass, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getRealDataSourceProperties, using: null
-DB: 23:12:47|-01 | info > No value in environment for: getDatabaseDialectDateFormat, using: dd-MMM-yy
-DB: 23:12:47|-01 | info > No value in environment for: getStackTrace, using: false
+1386552358409|-01 | debug > com.p6spy.engine.common.P6SpyOptions reloading properties
+DB: 03:12:58|-01 | info > No value in environment for: getFilter, using: false
+DB: 03:12:58|-01 | info > No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
+DB: 03:12:58|-01 | info > No value in environment for: getDeregisterDrivers, using: true
+DB: 03:12:58|-01 | info > No value in environment for: getUsePrefix, using: false
+DB: 03:12:58|-01 | info > No value in environment for: getAutoflush, using: true
+DB: 03:12:58|-01 | info > No value in environment for: getExclude, using: 
+DB: 03:12:58|-01 | info > No value in environment for: getExcludecategories, using: info,debug,result,batch
+DB: 03:12:58|-01 | info > No value in environment for: getInclude, using: 
+DB: 03:12:58|-01 | info > No value in environment for: getIncludecategories, using: 
+DB: 03:12:58|-01 | info > No value in environment for: getLogfile, using: spy.log
+DB: 03:12:58|-01 | info > No value in environment for: getRealdriver, using: org.postgresql.Driver
+DB: 03:12:58|-01 | info > No value in environment for: getRealdriver2, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getRealdriver3, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getAppend, using: true
+DB: 03:12:58|-01 | info > No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
+DB: 03:12:58|-01 | info > No value in environment for: getExecutionThreshold, using: 0
+DB: 03:12:58|-01 | info > No value in environment for: getDateformat, using: 'DB:' HH:MM:ss
+DB: 03:12:58|-01 | info > No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@ba62070e
+DB: 03:12:58|-01 | info > No value in environment for: getStackTraceClass, using: 
+DB: 03:12:58|-01 | info > No value in environment for: getSQLExpression, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getReloadProperties, using: false
+DB: 03:12:58|-01 | info > No value in environment for: getReloadPropertiesInterval, using: 60
+DB: 03:12:58|-01 | info > No value in environment for: getJNDIContextFactory, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getJNDIContextProviderURL, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getJNDIContextCustom, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getRealDataSource, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getRealDataSourceClass, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getRealDataSourceProperties, using: null
+DB: 03:12:58|-01 | info > No value in environment for: getDatabaseDialectDateFormat, using: dd-MMM-yy
+DB: 03:12:58|-01 | info > No value in environment for: getStackTrace, using: false

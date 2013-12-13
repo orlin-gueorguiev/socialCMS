@@ -30,5 +30,7 @@
 
 
 	<include file="v1/v1.0.xml" relativeToChangelogFile="true"/>
+	<include file="v1/v1.0.populate.xml" relativeToChangelogFile="true"/>
+	<include file="v1/v1.0.testdata.xml" relativeToChangelogFile="true"/>
 	
 </databaseChangeLog>
