@@ -1,0 +1,17 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd" logicalFilePath="v1/v1.0.populate.xml">
+	<changeSet id="v1_130911_populate_country" author="orlin" context="populate">
+		<insert tableName="Country">
+			<column name="nameInDefaultLanguage" value="България" />
+			<column name="zipCodePrefix" value="BG" />
+			<column name="isoCountryCode" value="bg" />
+		</insert>
+
+		<insert tableName="Country">
+			<column name="nameInDefaultLanguage" value="Deutschland" />
+			<column name="zipCodePrefix" value="DE" />
+			<column name="isoCountryCode" value="de" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>
