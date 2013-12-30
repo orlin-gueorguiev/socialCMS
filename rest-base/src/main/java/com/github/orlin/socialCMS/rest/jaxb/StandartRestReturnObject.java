@@ -2,7 +2,7 @@ package com.github.orlin.socialCMS.rest.jaxb;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
@@ -36,7 +36,7 @@ public class StandartRestReturnObject<J extends JaxBObject> {
 		return builder.toString();
 	}
 
-	@XmlAnyElement(lax=true)
+	@XmlElement(name="data")
 	public List<J> getQueriedObject() {
 		return queriedObject;
 	}

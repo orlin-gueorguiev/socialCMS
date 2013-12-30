@@ -109,10 +109,6 @@ public class CompanyRestService extends DefaultRestService<CompanyDao, CompanyFi
 	@XmlRootElement(name = "company")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class Company extends JaxBObject {
-		public Company() {
-			super("company");
-		}
-		
 		public String name;
 		public Long id;
 		public Address address;

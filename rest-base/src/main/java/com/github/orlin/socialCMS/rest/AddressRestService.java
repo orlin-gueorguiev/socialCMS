@@ -107,10 +107,6 @@ public class AddressRestService extends DefaultRestService<AddressDao, AddressFi
 	@XmlRootElement(name = "address")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class Address extends JaxBObject {
-		public Address() {
-			super("address");
-		}
-
 		public Long id;
 		public CountryRestService.Country country;
 		public Integer zipCode;

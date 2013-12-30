@@ -85,10 +85,6 @@ public class WebPresenceRestService extends DefaultRestService<WebPresenceDao, W
 	@XmlRootElement(name = "address")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class WebPresence extends JaxBObject {
-		public WebPresence() {
-			super("webPresence");
-		}
-
 		public Long id;
 		public String email;
 		public String webpage;

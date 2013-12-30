@@ -67,10 +67,6 @@ public class CountryRestService extends DefaultRestService<CountryDao, CountryFi
 	@XmlRootElement(name = "country")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class Country extends JaxBObject {
-		public Country() {
-			super("country");
-		}
-
 		public Long id;
 		public String name;
 		public String zipCodePrefix;

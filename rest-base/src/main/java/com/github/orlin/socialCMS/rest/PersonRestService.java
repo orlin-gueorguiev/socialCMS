@@ -124,10 +124,6 @@ public class PersonRestService extends DefaultRestService<PersonDao, PersonFilte
 	@XmlRootElement(name = "person")
 	@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 	public static class Person extends JaxBObject {
-		public Person() {
-			super("person");
-		}
-		
 		public Long id;
 		public String firstName;
 		public String lastName;

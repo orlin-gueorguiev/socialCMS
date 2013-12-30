@@ -28,6 +28,19 @@
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jettyVersion}</version>
+				<configuration>
+					<webApp>
+						<contextPath>/socialCRMRest</contextPath>
+					</webApp>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>socialCRMRest</warName>
+					<outputDirectory>/home/orlin/.bin/tomcat/webapps/</outputDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
