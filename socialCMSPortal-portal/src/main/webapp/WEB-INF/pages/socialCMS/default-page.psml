@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+
+  <title>Contacts</title>
+  <short-title>My Porlets page1</short-title>
+    <fragment id="tutorial-100" type="layout" name="jetspeed-layouts::VelocityOneColumn">  
+    <fragment id="express-101" type="portlet" name="socialCMSPortal-pa::socialCMSContactsPortlet"/>
+  </fragment>
+</page>
