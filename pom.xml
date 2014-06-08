@@ -131,7 +131,6 @@
 	</issueManagement>
 	<modules>
 		<module>database-base</module>
-		<module>p6spymod</module>
 		<module>rest-base</module>
 		<module>rest-test</module>
 		<module>socialCMSPortal</module>
