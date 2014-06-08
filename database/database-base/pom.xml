@@ -12,7 +12,7 @@
 
 	<properties>
 		<spring.version>3.1.0.RELEASE</spring.version>
-		<db-config>../profiles/${build.profile.id}/profile.properties</db-config>
+		<db-config>../../profiles/${build.profile.id}/profile.properties</db-config>
 	</properties>
 
 
@@ -82,7 +82,7 @@
 
 	<build>
 		<filters>
-			<filter>../profiles/${build.profile.id}/profile.properties</filter>
+			<filter>../../profiles/${build.profile.id}/profile.properties</filter>
 		</filters>
 
 

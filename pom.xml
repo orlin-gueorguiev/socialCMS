@@ -130,9 +130,8 @@
 		<url>https://github.com/orlin-gueorguiev/socialCMS/issues</url>
 	</issueManagement>
 	<modules>
-		<module>database-base</module>
-		<module>rest-base</module>
-		<module>rest-test</module>
 		<module>socialCMSPortal</module>
+		<module>database</module>
+		<module>rest</module>
 	</modules>
 </project>
