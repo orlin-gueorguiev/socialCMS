@@ -27,7 +27,7 @@ public abstract class SocialCMSGenericPortlet extends GenericPortlet {
 	 * @param response the response
 	 * @param jsUrl the url ot the JavaScript
 	 */
-	protected void addJS(RenderResponse response, String jsUrl) {
+	protected static void addJS(RenderResponse response, String jsUrl) {
 		Element script = response.createElement("script");
 		script.setAttribute("src", jsUrl);
 		script.setAttribute("type", "text/javascript");
@@ -40,7 +40,7 @@ public abstract class SocialCMSGenericPortlet extends GenericPortlet {
 	 * @param response the response
 	 * @param cssURL the url ot the css
 	 */
-	protected void addCSS(RenderResponse response, String cssURL) {
+	protected static void addCSS(RenderResponse response, String cssURL) {
 		Element link = response.createElement("link");
 		link.setAttribute("rel", "stylesheet");
 		link.setAttribute("href", cssURL);

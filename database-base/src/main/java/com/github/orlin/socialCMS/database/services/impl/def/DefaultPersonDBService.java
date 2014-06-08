@@ -35,6 +35,7 @@ public class DefaultPersonDBService extends GenericDBService<PersonDao, PersonFi
 		return new PersonFilter();
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public CriteriaQuery<PersonDao> generateCriteria(PersonFilter filter, CriteriaQuery<PersonDao> cq, CriteriaBuilder cb) {
 		Root<PersonDao> person = cq.from(getObjectClass());

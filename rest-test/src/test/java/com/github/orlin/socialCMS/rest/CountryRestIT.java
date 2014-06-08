@@ -11,12 +11,17 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
-public class CountryRestTest extends BaseRestTest {
+public class CountryRestIT extends BaseRestIT {
 	private String countryId;
 
-	
 	@Test
-	public void _01createCountry() throws Exception {
+	public void crud() {
+		_01createEntity();
+		_05getEntity();
+		_15deleteEntity();
+	}
+	
+	public void _01createEntity() {
 		WebResource webResource = generateWR("country");
 		MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
 		formData.add("name", "test");
@@ -32,15 +37,13 @@ public class CountryRestTest extends BaseRestTest {
 		countryId = getIdFromXml(responseStr);
 	}
 	
-	@Test
-	public void _05getCountry() {
+	public void _05getEntity() {
 		WebResource webResource = generateWR("country/"+countryId);
 		String response = webResource.accept(MediaType.TEXT_XML).get(String.class);
 		Assert.assertTrue(response.contains("<id>" + countryId + "</id>"));
 	}
 	
-	@Test
-	public void _15deleteCountry() {
+	public void _15deleteEntity() {
 		WebResource webResource = generateWR("country/"+countryId);
 		ClientResponse response = webResource.accept(MediaType.TEXT_XML).delete(ClientResponse.class);
 		Assert.assertEquals(204,response.getStatus());

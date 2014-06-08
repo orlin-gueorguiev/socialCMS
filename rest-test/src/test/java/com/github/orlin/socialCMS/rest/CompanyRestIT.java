@@ -11,36 +11,37 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
-public class PersonRestTest extends BaseRestTest {
-	private String entityId;
+public class CompanyRestIT extends BaseRestIT {
+	private String companyId;
 
-	
 	@Test
-	public void _01createEntity() throws Exception {
-		WebResource webResource = generateWR("person");
+	public void crud() {
+		_01createEntity();
+		_05getEntity();
+		_15deleteEntity();
+	}
+	
+	public void _01createEntity() {
+		WebResource webResource = generateWR("company");
 		MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
-		formData.add("firstName", "test");
-		formData.add("lastName", "test");
-		
-		ClientResponse response = webResource.accept(MediaType.TEXT_XML)
-		   .post(ClientResponse.class, formData);
-		
-		Assert.assertEquals(200,response.getStatus());
-		
+		formData.add("name", "test");
+
+		ClientResponse response = webResource.accept(MediaType.TEXT_XML).post(ClientResponse.class, formData);
+
+		Assert.assertEquals(200, response.getStatus());
+
 		String responseStr = response.getEntity(String.class);
-		entityId = getIdFromXml(responseStr);
+		companyId = getIdFromXml(responseStr);
 	}
 	
-	@Test
 	public void _05getEntity() {
-		WebResource webResource = generateWR("person/"+entityId);
+		WebResource webResource = generateWR("company/"+companyId);
 		String response = webResource.accept(MediaType.TEXT_XML).get(String.class);
-		Assert.assertTrue(response.contains("<id>" + entityId + "</id>"));
+		Assert.assertTrue(response.contains("<id>" + companyId + "</id>"));
 	}
 	
-	@Test
 	public void _15deleteEntity() {
-		WebResource webResource = generateWR("person/"+entityId);
+		WebResource webResource = generateWR("company/"+companyId);
 		ClientResponse response = webResource.accept(MediaType.TEXT_XML).delete(ClientResponse.class);
 		Assert.assertEquals(204,response.getStatus());
 	}

@@ -22,7 +22,6 @@
   <prerequisites>
     <maven>2.0.9</maven>
   </prerequisites>
-  <groupId>com.github.orlin.socialCMS</groupId>
   <artifactId>socialCMSPortal</artifactId>
   <name>socialCMSPortal portal project</name>
   <version>0.0.1-SNAPSHOT</version>
@@ -61,12 +60,12 @@
     <dependency>
       <groupId>org.apache.portals</groupId>
       <artifactId>portlet-api_2.0_spec</artifactId>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
     </dependency>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-servlet_2.4_spec</artifactId>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
     </dependency>
   </dependencies>
 
@@ -78,8 +77,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>7</source>
-            <target>7</target>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
             <debug>true</debug>
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
@@ -94,12 +93,12 @@
             <targets combine.children="append">
               <target>
                 <id>install-pa</id>
-                <dir>@rootdir@/socialCMSPortal-pa</dir>
+                <dir>socialCMSPortal-pa</dir>
                 <goals>clean,install</goals>
               </target>
               <target>
                 <id>install-portal</id>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <goals>clean,install</goals>
               </target>
               <target>
@@ -110,7 +109,7 @@
                 <id>db-portal</id>
                 <depends>install-portal</depends>
                 <name>portal</name>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <profiles>db</profiles>
               </target>
               <target>
@@ -121,21 +120,21 @@
                 <id>deploy-pa</id>
                 <depends>install-pa</depends>
                 <name>pa</name>
-                <dir>@rootdir@/socialCMSPortal-pa</dir>
+                <dir>socialCMSPortal-pa</dir>
                 <profiles>deploy</profiles>
               </target>
               <target>
                 <id>deploy-portal</id>
                 <depends>install</depends>
                 <name>portal</name>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <profiles>deploy</profiles>
               </target>
               <target>
                 <id>portal-seed</id>
                 <depends>install-portal</depends>
                 <name>portal</name>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <profiles>seed</profiles>
                 <properties>
                     <seed.file>j2-seed.xml</seed.file>
@@ -145,14 +144,14 @@
                 <id>portal-seed-dbpsml</id>
                 <depends>install-portal</depends>
                 <name>portal</name>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <profiles>seed-dbpsml</profiles>
               </target>
               <target>
                 <id>deploy-portal-dbpsml</id>
                 <depends>install-portal</depends>
                 <name>portal</name>
-                <dir>@rootdir@/socialCMSPortal-portal</dir>
+                <dir>socialCMSPortal-portal</dir>
                 <profiles>deploy-dbpsml</profiles>
               </target>
               
@@ -175,8 +174,13 @@
 
   </build>
 
+  <parent>
+  	<groupId>com.github.orlin.socialCMS</groupId>
+  	<artifactId>base</artifactId>
+  	<version>1.0-SNAPSHOT</version>
+  </parent>
   <modules>
-    <module>socialCMSPortal-portal</module>
-    <module>socialCMSPortal-pa</module>
+  	<module>socialCMSPortal-pa</module>
+  	<module>socialCMSPortal-portal</module>
   </modules>
 </project>

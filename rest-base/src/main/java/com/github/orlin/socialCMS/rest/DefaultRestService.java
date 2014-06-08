@@ -70,7 +70,7 @@ public abstract class DefaultRestService<T, F extends Filter, J extends JaxBObje
 	/**
 	 * @return Returns the EntityManager
 	 */
-	protected EntityManager getEntityManager() {
+	protected static EntityManager getEntityManager() {
 		return em;
 	}
 

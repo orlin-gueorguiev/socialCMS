@@ -34,19 +34,19 @@
   <packaging>war</packaging>
   <dependencies>
     <!-- jetspeed compile time dependencies -->
-    <!--
+
     <dependency>
       <groupId>org.apache.portals.jetspeed-2</groupId>
       <artifactId>jetspeed-api</artifactId>
       <version>${org.apache.portals.jetspeed.version}</version>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
     </dependency>
     <dependency>
       <groupId>org.apache.portals.jetspeed-2</groupId>
       <artifactId>jetspeed-portal</artifactId>
       <version>${org.apache.portals.jetspeed.version}</version>
     </dependency>
-    -->
+
     <!-- jetspeed war dependencies -->
     <dependency>
       <groupId>org.apache.portals.jetspeed-2</groupId>
@@ -64,7 +64,7 @@
       <groupId>org.apache.portals.pluto</groupId>
       <artifactId>pluto-container-api</artifactId>
       <version>${org.apache.pluto.version}</version>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
     </dependency>
   </dependencies>
 
@@ -182,6 +182,79 @@
         </configuration>
       </plugin>
     </plugins>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.portals.jetspeed-2
+    								</groupId>
+    								<artifactId>
+    									jetspeed-deploy-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.2.2,)
+    								</versionRange>
+    								<goals>
+    									<goal>deploy</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.portals.jetspeed-2
+    								</groupId>
+    								<artifactId>
+    									jetspeed-fileutils-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.2.2,)
+    								</versionRange>
+    								<goals>
+    									<goal>event</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.portals.jetspeed-2
+    								</groupId>
+    								<artifactId>
+    									jetspeed-unpack-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.2.2,)
+    								</versionRange>
+    								<goals>
+    									<goal>unpack</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 
 </project>
